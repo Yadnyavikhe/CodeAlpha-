@@ -1,0 +1,53 @@
+import java.util.*;
+
+class ChatBot {
+    private Map<String, String> knowledgeBase;
+
+    public ChatBot() {
+        knowledgeBase = new HashMap<>();
+
+        // Predefined rules (FAQ-style responses)
+        knowledgeBase.put("hi", "Hello! How can I help you today?");
+        knowledgeBase.put("hello", "Hi there! What can I do for you?");
+        knowledgeBase.put("how are you", "I'm just a bot, but I'm doing great! Thanks for asking.");
+        knowledgeBase.put("bye", "Goodbye! Have a great day.");
+        knowledgeBase.put("what is your name", "I am your Java AI Chatbot.");
+        knowledgeBase.put("help", "I can answer simple questions. Try asking about my name or say hello!");
+    }
+
+    public String getResponse(String userInput) {
+        userInput = userInput.toLowerCase().trim();
+
+        // Check if input matches a rule
+        if (knowledgeBase.containsKey(userInput)) {
+            return knowledgeBase.get(userInput);
+        }
+
+        // Fallback response
+        return "Sorry, I don't understand. Can you rephrase?";
+    }
+}
+
+public class AIChatBot {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ChatBot bot = new ChatBot();
+
+        System.out.println("=== Java AI Chatbot ===");
+        System.out.println("Type 'bye' to exit.");
+
+        while (true) {
+            System.out.print("You: ");
+            String userInput = sc.nextLine();
+
+            if (userInput.equalsIgnoreCase("bye")) {
+                System.out.println("Bot: " + bot.getResponse(userInput));
+                break;
+            }
+
+            System.out.println("Bot: " + bot.getResponse(userInput));
+        }
+
+        sc.close();
+    }
+}AI
